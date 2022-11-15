@@ -153,6 +153,14 @@ namespace POS {
 
 		double total;
 
+		time_t now = time(0);
+		tm* ltm = localtime(&now);
+
+		receipt << "Date: " << ltm->tm_mday << " " << ltm->tm_mon + 1 << " " << ltm->tm_year + 1900 << endl;
+		receipt << "Time: " << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << endl << endl;
+
+		receipt << "Total Items:" << basket.size() << endl << endl;
+
 		for (int i = 0; i < basket.size(); i++) {
 			receipt << "Item: " + basket[i].name << endl;
 			receipt << fixed << setprecision(2) << "Price: £" << basket[i].price / 100.00 << endl << endl;
