@@ -1,0 +1,24 @@
+Sausage Roll
+80
+Fry
+250
+Curry & Rice
+180
+Chips
+150
+Soda
+160
+Baked Potato
+145
+Pizza
+250
+Pizza Toppings
+25
+Panini
+240
+Soup
+100
+Bottles
+120
+Tea or Coffee
+90
