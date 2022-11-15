@@ -1,0 +1,16 @@
+Item: Pizza
+Price: £2.50
+
+Item: Pizza Topping
+Price: £0.25
+
+Item: Panini
+Price: £2.40
+
+Item: Tea or Coffe
+Price: £0.90
+
+Item: Soda
+Price: £1.60
+
+Total: £7.65

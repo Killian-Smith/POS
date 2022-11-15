@@ -137,6 +137,7 @@
     <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ItemArray.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
@@ -150,9 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="POS.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="items.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

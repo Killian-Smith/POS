@@ -1,6 +1,10 @@
 #pragma once
-#include <vector>
+
+#include <iostream>
 #include <iomanip>
+#include <vector>
+#include <fstream>
+
 #include "Item.cpp"
 
 vector<Item> basket;
