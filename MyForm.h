@@ -171,6 +171,10 @@ namespace POS {
 		receipt << fixed << setprecision(2) << "Total: £" << total / 100;
 
 		receipt.close();
+
+		this->Hide();
+		basket.clear();
+		
 	}
 	private: System::Void CancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Hide();
@@ -181,7 +185,7 @@ namespace POS {
 	public:
 		MyForm(void)
 		{
-			InitializeComponent();		
+			InitializeComponent();
 		}
 
 	protected:
