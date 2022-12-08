@@ -4,8 +4,10 @@
 #include <iomanip>
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <chrono>
 #include <ctime>
+#include <cmath>
 
 #include "Item.cpp"
 

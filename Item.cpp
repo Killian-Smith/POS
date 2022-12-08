@@ -1,5 +1,4 @@
-#ifndef ITEM_HEADER
-#define ITEM_HEADER
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -15,5 +14,3 @@ class Item {
 			price = p;
 		}
 };
-
-#endif

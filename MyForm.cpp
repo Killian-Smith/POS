@@ -18,6 +18,5 @@ void main() {
 	POS::MyForm form;
 
 	Application::Run(% form);
-
 }
 

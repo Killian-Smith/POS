@@ -35,6 +35,12 @@
     <ClInclude Include="ItemArray.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="ReceiptForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalculateChangeForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="POS.rc">

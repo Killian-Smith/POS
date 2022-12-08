@@ -1,7 +1,10 @@
 #pragma once
 
 #include <iostream>
+#include <cmath>
 #include "Header.h"
+#include "ReceiptForm.h"
+#include "CalculateChangeForm.h"
 
 using namespace std;
 
@@ -12,174 +15,6 @@ namespace POS {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
-	public ref class ReceiptForm : public System::Windows::Forms::Form {
-	public:
-		ReceiptForm(void)
-		{
-			InitializeComponent();
-		}
-
-	protected:
-		~ReceiptForm()
-		{
-			if (components)
-			{
-				delete components;
-			}
-		}
-	private:
-		System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
-		System::Windows::Forms::SplitContainer^ splitContainer1;
-		System::Windows::Forms::Button^ printButton;
-
-		System::Windows::Forms::Button^ cancelButton;
-		System::Windows::Forms::Label^ printLabel;
-
-		System::ComponentModel::Container^ components;
-
-#pragma region Windows Form Designer generated code
-		void InitializeComponent(void)
-		{
-			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
-			this->printButton = (gcnew System::Windows::Forms::Button());
-			this->cancelButton = (gcnew System::Windows::Forms::Button());
-			this->printLabel = (gcnew System::Windows::Forms::Label());
-			this->tableLayoutPanel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
-			this->splitContainer1->Panel1->SuspendLayout();
-			this->splitContainer1->Panel2->SuspendLayout();
-			this->splitContainer1->SuspendLayout();
-			this->SuspendLayout();
-			// 
-			// tableLayoutPanel1
-			// 
-			this->tableLayoutPanel1->AutoSize = true;
-			this->tableLayoutPanel1->ColumnCount = 1;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				20)));
-			this->tableLayoutPanel1->Controls->Add(this->splitContainer1, 0, 1);
-			this->tableLayoutPanel1->Controls->Add(this->printLabel, 0, 0);
-			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel1->GrowStyle = System::Windows::Forms::TableLayoutPanelGrowStyle::FixedSize;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 2;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(584, 361);
-			this->tableLayoutPanel1->TabIndex = 0;
-			// 
-			// splitContainer1
-			// 
-			this->splitContainer1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->splitContainer1->Location = System::Drawing::Point(3, 183);
-			this->splitContainer1->Name = L"splitContainer1";
-			// 
-			// splitContainer1.Panel1
-			// 
-			this->splitContainer1->Panel1->Controls->Add(this->printButton);
-			// 
-			// splitContainer1.Panel2
-			// 
-			this->splitContainer1->Panel2->Controls->Add(this->cancelButton);
-			this->splitContainer1->Size = System::Drawing::Size(578, 175);
-			this->splitContainer1->SplitterDistance = 289;
-			this->splitContainer1->TabIndex = 0;
-			// 
-			// printButton
-			// 
-			this->printButton->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->printButton->Location = System::Drawing::Point(0, 0);
-			this->printButton->Name = L"printButton";
-			this->printButton->Size = System::Drawing::Size(289, 175);
-			this->printButton->TabIndex = 0;
-			this->printButton->Text = L"Print";
-			this->printButton->UseVisualStyleBackColor = true;
-			this->printButton->Click += gcnew System::EventHandler(this, &ReceiptForm::PrintButton_Click);
-			// 
-			// cancelButton
-			// 
-			this->cancelButton->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->cancelButton->Location = System::Drawing::Point(0, 0);
-			this->cancelButton->Name = L"cancelButton";
-			this->cancelButton->Size = System::Drawing::Size(285, 175);
-			this->cancelButton->TabIndex = 0;
-			this->cancelButton->Text = L"Cancel";
-			this->cancelButton->UseVisualStyleBackColor = true;
-			this->cancelButton->Click += gcnew System::EventHandler(this, &ReceiptForm::CancelButton_Click);
-			// 
-			// printLabel
-			// 
-			this->printLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->printLabel->AutoSize = true;
-			this->printLabel->Location = System::Drawing::Point(3, 0);
-			this->printLabel->Name = L"printLabel";
-			this->printLabel->Size = System::Drawing::Size(578, 180);
-			this->printLabel->TabIndex = 1;
-			this->printLabel->Text = L"Print Receipt\?";
-			this->printLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// ReceiptForm
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(584, 361);
-			this->Controls->Add(this->tableLayoutPanel1);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Name = L"ReceiptForm";
-			this->Text = L"ReceiptForm";
-			this->tableLayoutPanel1->ResumeLayout(false);
-			this->tableLayoutPanel1->PerformLayout();
-			this->splitContainer1->Panel1->ResumeLayout(false);
-			this->splitContainer1->Panel2->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->EndInit();
-			this->splitContainer1->ResumeLayout(false);
-			this->ResumeLayout(false);
-			this->PerformLayout();
-
-		}
-#pragma endregion
-
-	private: System::Void PrintButton_Click(System::Object^ sender, System::EventArgs^ e) {
-	    fstream receipt;
-		receipt.open("receipt.txt");
-		receipt.clear();
-
-		double total;
-
-		time_t now = time(0);
-		tm* ltm = localtime(&now);
-
-		receipt << "Date: " << ltm->tm_mday << " " << ltm->tm_mon + 1 << " " << ltm->tm_year + 1900 << endl;
-		receipt << "Time: " << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << endl << endl;
-
-		receipt << "Total Items:" << basket.size() << endl << endl;
-
-		for (int i = 0; i < basket.size(); i++) {
-			receipt << "Item: " + basket[i].name << endl;
-			receipt << fixed << setprecision(2) << "Price: £" << basket[i].price / 100.00 << endl << endl;
-
-			total += basket[i].price;
-		}
-
-		receipt << fixed << setprecision(2) << "Total: £" << total / 100;
-
-		receipt.close();
-
-		this->Hide();
-		basket.clear();
-		
-	}
-	private: System::Void CancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
-		this->Hide();
-	}
-	};
 
 	public ref class MyForm : public System::Windows::Forms::Form {
 	public:
@@ -228,6 +63,8 @@ namespace POS {
 
 			double total = 0;
 			for (int i = 0; i < basket.size(); i++) {
+				auto buttonText = gcnew String(basket[i].name.c_str());
+
 				System::Windows::Forms::Button^ item;
 				item = (gcnew System::Windows::Forms::Button());
 
@@ -235,7 +72,7 @@ namespace POS {
 				item->Name = "item" + i;
 				item->Size = System::Drawing::Size(items->Width - 25, 100);
 				item->TabIndex = 0;
-				item->Text = gcnew String(basket[i].name.c_str());
+				item->Text = buttonText + "\r\n£" + Math::Round(basket[i].price / 100.00, 2).ToString("F2");
 				item->UseVisualStyleBackColor = true;
 
 				this->Controls->Add(item);
@@ -243,11 +80,10 @@ namespace POS {
 
 				total += basket[i].price / 100.00;
 
-				this->chargeButton->Text = "Charge £" + total.ToString();
+				this->chargeButton->Text = "Charge £" + Math::Round(total, 2).ToString("F2");
 			}
 		}
 
-#pragma region Windows Form Designer generated code
 		void InitializeComponent(void) {
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->button13 = (gcnew System::Windows::Forms::Button());
@@ -287,12 +123,12 @@ namespace POS {
 				50)));
 			this->tableLayoutPanel3->Controls->Add(this->button13, 0, 0);
 			this->tableLayoutPanel3->Controls->Add(this->button14, 1, 0);
-			this->tableLayoutPanel3->Location = System::Drawing::Point(383, 731);
+			this->tableLayoutPanel3->Location = System::Drawing::Point(291, 619);
 			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
 			this->tableLayoutPanel3->RowCount = 2;
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel3->Size = System::Drawing::Size(1136, 307);
+			this->tableLayoutPanel3->Size = System::Drawing::Size(860, 259);
 			this->tableLayoutPanel3->TabIndex = 3;
 			// 
 			// button13
@@ -300,12 +136,16 @@ namespace POS {
 			this->button13->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->button13->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->button13->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->button13->Location = System::Drawing::Point(3, 3);
 			this->button13->Name = L"button13";
-			this->button13->Size = System::Drawing::Size(562, 147);
+			this->button13->Size = System::Drawing::Size(424, 123);
 			this->button13->TabIndex = 0;
 			this->button13->Text = L"Remove Last Item";
-			this->button13->UseVisualStyleBackColor = true;
+			this->button13->UseVisualStyleBackColor = false;
 			this->button13->Click += gcnew System::EventHandler(this, &MyForm::Button13_Click);
 			// 
 			// button14
@@ -313,12 +153,16 @@ namespace POS {
 			this->button14->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button14->Location = System::Drawing::Point(571, 3);
+			this->button14->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(232)), static_cast<System::Int32>(static_cast<System::Byte>(109)),
+				static_cast<System::Int32>(static_cast<System::Byte>(100)));
+			this->button14->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button14->Location = System::Drawing::Point(433, 3);
 			this->button14->Name = L"button14";
-			this->button14->Size = System::Drawing::Size(562, 147);
+			this->button14->Size = System::Drawing::Size(424, 123);
 			this->button14->TabIndex = 1;
 			this->button14->Text = L"Restart";
-			this->button14->UseVisualStyleBackColor = true;
+			this->button14->UseVisualStyleBackColor = false;
 			this->button14->Click += gcnew System::EventHandler(this, &MyForm::Button14_Click);
 			// 
 			// tableLayoutPanel2
@@ -333,7 +177,6 @@ namespace POS {
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				25)));
 			this->tableLayoutPanel2->Controls->Add(this->button1, 0, 0);
-			this->tableLayoutPanel2->Controls->Add(this->button2, 1, 0);
 			this->tableLayoutPanel2->Controls->Add(this->button3, 2, 0);
 			this->tableLayoutPanel2->Controls->Add(this->button4, 3, 0);
 			this->tableLayoutPanel2->Controls->Add(this->button5, 0, 1);
@@ -344,14 +187,15 @@ namespace POS {
 			this->tableLayoutPanel2->Controls->Add(this->button11, 2, 2);
 			this->tableLayoutPanel2->Controls->Add(this->button12, 3, 2);
 			this->tableLayoutPanel2->Controls->Add(this->button6, 1, 1);
+			this->tableLayoutPanel2->Controls->Add(this->button2, 1, 0);
 			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel2->Location = System::Drawing::Point(383, 3);
+			this->tableLayoutPanel2->Location = System::Drawing::Point(291, 3);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 			this->tableLayoutPanel2->RowCount = 3;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 33.33333F)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 33.33333F)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 33.33333F)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(1136, 722);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(860, 610);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
 			// button1
@@ -359,9 +203,11 @@ namespace POS {
 			this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->button1->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->button1->Location = System::Drawing::Point(3, 3);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(278, 234);
+			this->button1->Size = System::Drawing::Size(209, 197);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Sausage Roll\r\n£0.80";
 			this->button1->UseVisualStyleBackColor = true;
@@ -372,9 +218,11 @@ namespace POS {
 			this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button2->Location = System::Drawing::Point(287, 3);
+			this->button2->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button2->Location = System::Drawing::Point(218, 3);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(278, 234);
+			this->button2->Size = System::Drawing::Size(209, 197);
 			this->button2->TabIndex = 1;
 			this->button2->Text = L"Fry\r\n£2.50\r\n";
 			this->button2->UseVisualStyleBackColor = true;
@@ -385,9 +233,11 @@ namespace POS {
 			this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button3->Location = System::Drawing::Point(571, 3);
+			this->button3->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button3->Location = System::Drawing::Point(433, 3);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(278, 234);
+			this->button3->Size = System::Drawing::Size(209, 197);
 			this->button3->TabIndex = 2;
 			this->button3->Text = L"Curry and Rice\r\n£1.80";
 			this->button3->UseVisualStyleBackColor = true;
@@ -398,9 +248,11 @@ namespace POS {
 			this->button4->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button4->Location = System::Drawing::Point(855, 3);
+			this->button4->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button4->Location = System::Drawing::Point(648, 3);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(278, 234);
+			this->button4->Size = System::Drawing::Size(209, 197);
 			this->button4->TabIndex = 3;
 			this->button4->Text = L"Chips\r\n£1.50";
 			this->button4->UseVisualStyleBackColor = true;
@@ -411,9 +263,11 @@ namespace POS {
 			this->button5->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button5->Location = System::Drawing::Point(3, 243);
+			this->button5->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button5->Location = System::Drawing::Point(3, 206);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(278, 234);
+			this->button5->Size = System::Drawing::Size(209, 197);
 			this->button5->TabIndex = 4;
 			this->button5->Text = L"Baked Potato\r\n£1.45";
 			this->button5->UseVisualStyleBackColor = true;
@@ -424,9 +278,11 @@ namespace POS {
 			this->button7->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button7->Location = System::Drawing::Point(571, 243);
+			this->button7->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button7->Location = System::Drawing::Point(433, 206);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(278, 234);
+			this->button7->Size = System::Drawing::Size(209, 197);
 			this->button7->TabIndex = 6;
 			this->button7->Text = L"Pizza Topping\r\n£0.25";
 			this->button7->UseVisualStyleBackColor = true;
@@ -437,9 +293,11 @@ namespace POS {
 			this->button8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button8->Location = System::Drawing::Point(855, 243);
+			this->button8->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button8->Location = System::Drawing::Point(648, 206);
 			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(278, 234);
+			this->button8->Size = System::Drawing::Size(209, 197);
 			this->button8->TabIndex = 7;
 			this->button8->Text = L"Panini\r\n£2.40";
 			this->button8->UseVisualStyleBackColor = true;
@@ -450,9 +308,11 @@ namespace POS {
 			this->button9->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button9->Location = System::Drawing::Point(3, 483);
+			this->button9->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button9->Location = System::Drawing::Point(3, 409);
 			this->button9->Name = L"button9";
-			this->button9->Size = System::Drawing::Size(278, 236);
+			this->button9->Size = System::Drawing::Size(209, 198);
 			this->button9->TabIndex = 8;
 			this->button9->Text = L"Soup\r\n£1.00";
 			this->button9->UseVisualStyleBackColor = true;
@@ -463,9 +323,11 @@ namespace POS {
 			this->button10->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button10->Location = System::Drawing::Point(287, 483);
+			this->button10->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button10->Location = System::Drawing::Point(218, 409);
 			this->button10->Name = L"button10";
-			this->button10->Size = System::Drawing::Size(278, 236);
+			this->button10->Size = System::Drawing::Size(209, 198);
 			this->button10->TabIndex = 9;
 			this->button10->Text = L"Bottles\r\n£1.20";
 			this->button10->UseVisualStyleBackColor = true;
@@ -476,9 +338,11 @@ namespace POS {
 			this->button11->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button11->Location = System::Drawing::Point(571, 483);
+			this->button11->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button11->Location = System::Drawing::Point(433, 409);
 			this->button11->Name = L"button11";
-			this->button11->Size = System::Drawing::Size(278, 236);
+			this->button11->Size = System::Drawing::Size(209, 198);
 			this->button11->TabIndex = 10;
 			this->button11->Text = L"Soda\r\n£1.60";
 			this->button11->UseVisualStyleBackColor = true;
@@ -489,9 +353,11 @@ namespace POS {
 			this->button12->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button12->Location = System::Drawing::Point(855, 483);
+			this->button12->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button12->Location = System::Drawing::Point(648, 409);
 			this->button12->Name = L"button12";
-			this->button12->Size = System::Drawing::Size(278, 236);
+			this->button12->Size = System::Drawing::Size(209, 198);
 			this->button12->TabIndex = 11;
 			this->button12->Text = L"Tea or Coffe\r\n£0.90";
 			this->button12->UseVisualStyleBackColor = true;
@@ -502,9 +368,11 @@ namespace POS {
 			this->button6->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->button6->Location = System::Drawing::Point(287, 243);
+			this->button6->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button6->Location = System::Drawing::Point(218, 206);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(278, 234);
+			this->button6->Size = System::Drawing::Size(209, 197);
 			this->button6->TabIndex = 5;
 			this->button6->Text = L"Pizza\r\n£2.50";
 			this->button6->UseVisualStyleBackColor = true;
@@ -534,7 +402,7 @@ namespace POS {
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(1904, 1041);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(1444, 881);
 			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// items
@@ -542,9 +410,9 @@ namespace POS {
 			this->items->AutoScroll = true;
 			this->items->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->items->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
-			this->items->Location = System::Drawing::Point(1525, 3);
+			this->items->Location = System::Drawing::Point(1157, 3);
 			this->items->Name = L"items";
-			this->items->Size = System::Drawing::Size(376, 722);
+			this->items->Size = System::Drawing::Size(284, 610);
 			this->items->TabIndex = 4;
 			this->items->WrapContents = false;
 			// 
@@ -559,12 +427,12 @@ namespace POS {
 			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				20)));
 			this->tableLayoutPanel4->Controls->Add(this->chargeButton, 0, 0);
-			this->tableLayoutPanel4->Location = System::Drawing::Point(1525, 731);
+			this->tableLayoutPanel4->Location = System::Drawing::Point(1157, 619);
 			this->tableLayoutPanel4->Name = L"tableLayoutPanel4";
 			this->tableLayoutPanel4->RowCount = 2;
 			this->tableLayoutPanel4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->tableLayoutPanel4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel4->Size = System::Drawing::Size(376, 307);
+			this->tableLayoutPanel4->Size = System::Drawing::Size(284, 259);
 			this->tableLayoutPanel4->TabIndex = 5;
 			// 
 			// chargeButton
@@ -572,12 +440,16 @@ namespace POS {
 			this->chargeButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
+			this->chargeButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(50)), static_cast<System::Int32>(static_cast<System::Byte>(194)),
+				static_cast<System::Int32>(static_cast<System::Byte>(104)));
+			this->chargeButton->Font = (gcnew System::Drawing::Font(L"Arial", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->chargeButton->Location = System::Drawing::Point(3, 3);
 			this->chargeButton->Name = L"chargeButton";
-			this->chargeButton->Size = System::Drawing::Size(370, 147);
+			this->chargeButton->Size = System::Drawing::Size(278, 123);
 			this->chargeButton->TabIndex = 1;
 			this->chargeButton->Text = L"Charge";
-			this->chargeButton->UseVisualStyleBackColor = true;
+			this->chargeButton->UseVisualStyleBackColor = false;
 			this->chargeButton->Click += gcnew System::EventHandler(this, &MyForm::ChargeButton_Click);
 			// 
 			// MyForm
@@ -585,7 +457,7 @@ namespace POS {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Window;
-			this->ClientSize = System::Drawing::Size(1904, 1041);
+			this->ClientSize = System::Drawing::Size(1444, 881);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Cursor = System::Windows::Forms::Cursors::Cross;
 			this->Name = L"MyForm";
@@ -649,18 +521,35 @@ namespace POS {
 		}
 
 		private: System::Void Button13_Click(System::Object^ sender, System::EventArgs^ e) {
-			basket.pop_back();
-			getItems();
+			if (basket.size() != 0) {
+				basket.pop_back();
+				getItems();
+			}
+			
 		}
 		private: System::Void Button14_Click(System::Object^ sender, System::EventArgs^ e) {
 			basket.clear();
 			getItems();
 		}
 		private: System::Void ChargeButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			ReceiptForm^ receiptForm;
-			receiptForm = (gcnew ReceiptForm());
+			if (basket.size() != 0) {
+				
+				auto result = MessageBox::Show("Is the customer paying with cash?", "Payment", MessageBoxButtons::YesNo);
 
-			receiptForm->Show();
+				if (result == System::Windows::Forms::DialogResult::Yes) {
+					CalculateChangeForm^ calculateChangeForm;
+					calculateChangeForm = (gcnew CalculateChangeForm());
+					calculateChangeForm->Show();
+				} else {
+					ReceiptForm^ receiptForm;
+					receiptForm = (gcnew ReceiptForm());
+					receiptForm->Show();
+				}
+			}
+			else {
+				MessageBox::Show("Basket must have at least one item.", "Error");
+			}
+			
 		}
 	};	
 }

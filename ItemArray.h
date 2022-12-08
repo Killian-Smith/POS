@@ -2,8 +2,7 @@
 #define ITEM_ARRAY_HEADER
 #include <vector>
 #include "Item.cpp"
-
-vector<Item> basket;
+                   
 
 #endif
 
