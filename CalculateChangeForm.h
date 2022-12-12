@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include "Header.h"
+#include "ReceiptForm.h"
+
 double totalDue;
 string totalGivenPounds = "";
 
@@ -65,18 +67,42 @@ namespace POS {
 		double totalGiven;
 
 		void addToTotalGiven(string num) {
-			totalGivenPounds += num;
-			totalGiven = stoi(totalGivenPounds);
+			if (totalGivenPounds.length() < 6) {
+				totalGivenPounds += num;
+				totalGiven = stoi(totalGivenPounds);
+
+				ostringstream intTotal;
+
+				intTotal << fixed << setprecision(2);
+
+				intTotal << totalGiven / 100 << endl;
+
+				string str = intTotal.str();
+
+				totalGivenLabel->Text = "Total Given: £" + gcnew String(str.c_str());
+			}
+		}
+
+		void clear() {
+			totalGiven = 0;
+			totalGivenPounds = "";
 
 			ostringstream intTotal;
 
 			intTotal << fixed << setprecision(2);
-
 			intTotal << totalGiven / 100 << endl;
 
 			string str = intTotal.str();
 
-			totalGivenLabel->Text = "Total Given: £" + gcnew String(str.c_str());;
+			totalGivenLabel->Text = "Total Given: £" + gcnew String(str.c_str());
+		}
+
+		void backspace() {
+			if (totalGivenPounds.size() != 0) {
+				totalGivenPounds.pop_back();
+			} 
+
+			totalGivenLabel->Text = "Total Given: £" + gcnew String(totalGivenPounds.c_str());
 		}
 
 	private:
@@ -304,6 +330,7 @@ namespace POS {
 			this->clearButton->TabIndex = 9;
 			this->clearButton->Text = L"C";
 			this->clearButton->UseVisualStyleBackColor = true;
+			this->clearButton->Click += gcnew System::EventHandler(this, &CalculateChangeForm::clearButton_Click);
 			// 
 			// number0
 			// 
@@ -329,6 +356,7 @@ namespace POS {
 			this->button5p->TabIndex = 12;
 			this->button5p->Text = L"£5";
 			this->button5p->UseVisualStyleBackColor = true;
+			this->button5p->Click += gcnew System::EventHandler(this, &CalculateChangeForm::button5p_Click);
 			// 
 			// button10p
 			// 
@@ -341,6 +369,7 @@ namespace POS {
 			this->button10p->TabIndex = 13;
 			this->button10p->Text = L"£10";
 			this->button10p->UseVisualStyleBackColor = true;
+			this->button10p->Click += gcnew System::EventHandler(this, &CalculateChangeForm::button10p_Click);
 			// 
 			// button20p
 			// 
@@ -353,6 +382,7 @@ namespace POS {
 			this->button20p->TabIndex = 14;
 			this->button20p->Text = L"£20";
 			this->button20p->UseVisualStyleBackColor = true;
+			this->button20p->Click += gcnew System::EventHandler(this, &CalculateChangeForm::button20p_Click);
 			// 
 			// backspaceButton
 			// 
@@ -380,6 +410,7 @@ namespace POS {
 			this->button50p->TabIndex = 16;
 			this->button50p->Text = L"£50";
 			this->button50p->UseVisualStyleBackColor = true;
+			this->button50p->Click += gcnew System::EventHandler(this, &CalculateChangeForm::button50p_Click);
 			// 
 			// tableLayoutPanel1
 			// 
@@ -489,6 +520,7 @@ namespace POS {
 			this->finishButton->TabIndex = 1;
 			this->finishButton->Text = L"Finish";
 			this->finishButton->UseVisualStyleBackColor = false;
+			this->finishButton->Click += gcnew System::EventHandler(this, &CalculateChangeForm::FinishButton_Click);
 			// 
 			// CalculateChangeForm
 			// 
@@ -549,18 +581,40 @@ namespace POS {
 		private: System::Void PeriodButton_Click(System::Object^ sender, System::EventArgs^ e) {
 			addToTotalGiven(".");
 		}
+		private: System::Void button5p_Click(System::Object^ sender, System::EventArgs^ e) {
+			totalGivenPounds = "";
+			addToTotalGiven("500");
+		}
+		private: System::Void button10p_Click(System::Object^ sender, System::EventArgs^ e) {
+			totalGivenPounds = "";
+			addToTotalGiven("1000");
+		}
+		private: System::Void button20p_Click(System::Object^ sender, System::EventArgs^ e) {
+			totalGivenPounds = "";
+			addToTotalGiven("2000");
+		}
+		private: System::Void button50p_Click(System::Object^ sender, System::EventArgs^ e) {
+			totalGivenPounds = "";
+			addToTotalGiven("5000");
+		}
 		private: System::Void BackspaceButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			totalGivenPounds.pop_back();
-			cout << totalGivenPounds.size();
-			if (totalGivenPounds.size() != 0) {
-				totalGivenLabel->Text = "Total Given: £" + gcnew String(totalGivenPounds.c_str());;
-			}
+			backspace();
 		}
 		private: System::Void changeButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			double due = totalGiven - ceil(totalDue * 100);
-			string change = to_string(due);
-			
-			changeDueLabel->Text = gcnew String(change.c_str());;
+			cout << totalGiven << endl << totalDue << endl;
+
+			double due = (totalGiven - (totalDue * 100)) / 100;
+
+			changeDueLabel->Text = "Change Due: £" + Math::Round(due, 2).ToString("F2");
 		}
-	};
+		private: System::Void clearButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			clear();
+		}
+		private: System::Void FinishButton_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->Hide();
+			ReceiptForm^ receiptForm;
+			receiptForm = (gcnew ReceiptForm());
+			receiptForm->Show();
+		}
+};
 }

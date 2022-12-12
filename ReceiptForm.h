@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
-
+#include <windows.h>
+#include <Shlobj.h>
+#include <fstream>
 
 namespace POS {
 	using namespace System;
@@ -9,6 +11,8 @@ namespace POS {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+
+	namespace fs = std::experimental::filesystem;
 
 	public ref class ReceiptForm : public System::Windows::Forms::Form {
 	public:
@@ -152,10 +156,16 @@ namespace POS {
 		}
 
 		private: System::Void PrintButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			fstream receipt;
-			receipt.open("receipt.txt");
-			receipt.clear();
+			
+			
 
+			
+
+			/*fstream receipt("receipt.txt");
+			receipt.open("receipt.txt");
+
+			fs::resize_file("receipt.txt", 0);
+			receipt.seekp(0);
 			double total;
 
 			time_t now = time(0);
@@ -178,7 +188,7 @@ namespace POS {
 			receipt.close();
 
 			this->Hide();
-			basket.clear();
+			basket.clear();*/
 		}
 
 		private: System::Void CancelButton_Click(System::Object^ sender, System::EventArgs^ e) {
