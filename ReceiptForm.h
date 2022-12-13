@@ -156,25 +156,28 @@ namespace POS {
 		}
 
 		private: System::Void PrintButton_Click(System::Object^ sender, System::EventArgs^ e) {
-			
-			
-
-			
-
-			/*fstream receipt("receipt.txt");
-			receipt.open("receipt.txt");
-
-			fs::resize_file("receipt.txt", 0);
-			receipt.seekp(0);
 			double total;
 
 			time_t now = time(0);
 			tm* ltm = localtime(&now);
 
+			char documentsPath[MAX_PATH];
+			HRESULT result = SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, documentsPath);
+
+			string date = to_string(now);
+
+			string filePath = string(documentsPath) + "\\receipts\\" + date + ".txt";
+
+			ofstream receipt(filePath);
+
 			receipt << "Date: " << ltm->tm_mday << " " << ltm->tm_mon + 1 << " " << ltm->tm_year + 1900 << endl;
 			receipt << "Time: " << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << endl << endl;
 
-			receipt << "Total Items:" << basket.size() << endl << endl;
+			receipt << "-----------" << endl << endl;
+
+			receipt << "Total Items: " << basket.size() << endl << endl;
+
+
 
 			for (int i = 0; i < basket.size(); i++) {
 				receipt << "Item: " + basket[i].name << endl;
@@ -183,12 +186,21 @@ namespace POS {
 				total += basket[i].price;
 			}
 
-			receipt << fixed << setprecision(2) << "Total: £" << total / 100;
+			receipt << "-----------" << endl << endl;
+
+			receipt << "Payment Type: Cash" << endl << endl;
+
+			receipt << fixed << setprecision(2) << "Sub Total: £" << total / 100 << endl;
+			receipt << "Cash: £" << "10.00" << endl;
+			receipt << "Change: £" << "1.00" << endl;
 
 			receipt.close();
 
+			string command = "start " + filePath;
+			system(command.c_str());
+
 			this->Hide();
-			basket.clear();*/
+			basket.clear();
 		}
 
 		private: System::Void CancelButton_Click(System::Object^ sender, System::EventArgs^ e) {

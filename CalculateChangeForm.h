@@ -98,11 +98,25 @@ namespace POS {
 		}
 
 		void backspace() {
-			if (totalGivenPounds.size() != 0) {
+			if (totalGivenPounds.size() > 0) {
 				totalGivenPounds.pop_back();
-			} 
 
-			totalGivenLabel->Text = "Total Given: £" + gcnew String(totalGivenPounds.c_str());
+				if (totalGivenPounds.length() != 0) {
+					totalGiven = stoi(totalGivenPounds);
+				} else {
+					totalGiven = 0;
+				}
+
+				ostringstream intTotal;
+
+				intTotal << fixed << setprecision(2);
+
+				intTotal << totalGiven / 100 << endl;
+
+				string str = intTotal.str();
+
+				totalGivenLabel->Text = "Total Given: £" + gcnew String(str.c_str());
+			}
 		}
 
 	private:
